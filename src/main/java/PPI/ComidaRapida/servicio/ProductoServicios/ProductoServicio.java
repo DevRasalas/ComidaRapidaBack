@@ -52,7 +52,7 @@ public class ProductoServicio implements IProductosServicio{
 
         String extension = "." + tipoMIME.substring("image/".length());
         LOGGER.info(extension);
-        String nombreArchivo = nombre.replace(" ", "_") + extension;
+        String nombreArchivo = nombre.replace(" ", "_").replace("\"", "") + extension;
 
         
         

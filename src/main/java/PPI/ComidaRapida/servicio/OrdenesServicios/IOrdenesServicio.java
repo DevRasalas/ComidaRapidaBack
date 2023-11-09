@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import PPI.ComidaRapida.modelo.Ordenes;
-import PPI.ComidaRapida.modelo.Producto_Ordenes;
 
 public interface IOrdenesServicio {
-    public List<Ordenes> mostrarOrdenes();
-    public List<Producto_Ordenes> mostrarProducto_Ordenes();
+    public List<Ordenes> mostrarOrdenes(Integer idUsuario);
+    public List<Object[]> mostrarProducto_Ordenes(Integer idOrden);
     public void crearOrdenConProducto(Map<String, Object> ordenes);
 }

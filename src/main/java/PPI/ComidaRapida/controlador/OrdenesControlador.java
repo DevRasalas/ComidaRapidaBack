@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import PPI.ComidaRapida.modelo.Ordenes;
@@ -28,12 +29,12 @@ public class OrdenesControlador {
     
     
     @GetMapping("/ordenes")
-    public List<Ordenes> mostrarOrdenes(){
-        return this.ordenesServicio.mostrarOrdenes();
+    public List<Ordenes> mostrarOrdenes(@RequestParam("idUsuario") Integer idUsuario ){
+        return this.ordenesServicio.mostrarOrdenes(idUsuario);
     }
     @GetMapping("/producto_ordenes")
-    public List<Producto_Ordenes> mostrarProductoOrdenes(){
-        return this.ordenesServicio.mostrarProducto_Ordenes();
+    public List<Object[]> mostrarProductoOrdenes(@RequestParam("idOrden") Integer idOrden){
+        return this.ordenesServicio.mostrarProducto_Ordenes(idOrden);
     }
 }
 
