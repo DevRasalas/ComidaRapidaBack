@@ -42,15 +42,19 @@ public class ProductoServicio implements IProductosServicio{
     }
 
     @Override
-    public String almacenarImagen(MultipartFile multipartFile) {
+    public String almacenarImagen(MultipartFile multipartFile, String nombre) {
         try{
             if(multipartFile.isEmpty()){
             throw new RuntimeException("Archivo vacio");
         }
+        String tipoMIME = multipartFile.getContentType();
+       LOGGER.info(tipoMIME);
+
+        String extension = "." + tipoMIME.substring("image/".length());
+        LOGGER.info(extension);
+        String nombreArchivo = nombre.replace(" ", "_") + extension;
+
         
-        
-       
-        String nombreArchivo = multipartFile.getOriginalFilename();
         
         Path destinoImagen = ubicacionRaiz.resolve(Paths.get(nombreArchivo)).normalize().toAbsolutePath();
         
@@ -87,6 +91,35 @@ public class ProductoServicio implements IProductosServicio{
     @Override
     public List<Producto> mostrarProductos() {
         return this.productoRepositorio.findAll();
+    }
+
+    @Override
+    public void eliminarProducto(Integer idProducto) {
+        Producto producto = this.productoRepositorio.findById(idProducto).orElse(null);
+        Path rutaImagen = Paths.get("./mediafiles");
+        String nombreImagen = producto.getUrlImagen().substring(28);
+        LOGGER.info(nombreImagen);
+        try {
+            Files.walk(rutaImagen)
+                .filter(path -> path.getFileName().toString().equals(nombreImagen))
+                .forEach(path -> {
+                    try {
+                        Files.delete(path); // Elimina el archivo
+                        LOGGER.info("Liminado con exito");
+                    } catch (IOException e) {
+                        LOGGER.info(e.getMessage());
+                    }
+                });
+        } catch (IOException e) {
+            System.err.println("Error al buscar archivos de imagen: " + e.getMessage());
+        }
+        this.productoRepositorio.deleteById(idProducto);
+
+    }
+
+    @Override
+    public Producto actualizarProducto(Producto producto) {
+        return this.productoRepositorio.save(producto);
     }
 
     

@@ -10,8 +10,10 @@ import PPI.ComidaRapida.modelo.Producto;
 
 public interface IProductosServicio {
     void init() throws IOException;
-    String almacenarImagen(MultipartFile multipartFile);
+    String almacenarImagen(MultipartFile multipartFile, String nombre);
     Producto almacenarProducto(Producto producto);
     Resource cargarComoRecurse(String nombreImagen);
     List<Producto> mostrarProductos();
+    void eliminarProducto(Integer idProducto);
+    Producto actualizarProducto(Producto producto);
 }

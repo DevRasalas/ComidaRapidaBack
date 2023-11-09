@@ -1,6 +1,7 @@
 package PPI.ComidaRapida.controlador;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import PPI.ComidaRapida.modelo.Ordenes;
-import PPI.ComidaRapida.modelo.OrdenesDetalles;
+import PPI.ComidaRapida.modelo.Producto_Ordenes;
 import PPI.ComidaRapida.servicio.OrdenesServicio;
 
 @RestController
@@ -19,22 +20,20 @@ import PPI.ComidaRapida.servicio.OrdenesServicio;
 public class OrdenesControlador {
     @Autowired
     private OrdenesServicio ordenesServicio;
-
+    
     @PostMapping("/ordenes")
-    public Ordenes guardarOrden(@RequestBody Ordenes ordenes){
-        ordenId = ordenes.getId_orden();
-        return this.ordenesServicio.addOrdenes(ordenes);
+    public void guardarOrden(@RequestBody Map<String, Object> ordenes){
+         this.ordenesServicio.crearOrdenConProducto(ordenes);
     }
-    @PostMapping("/detalles-ordenes")
-    public OrdenesDetalles guardarDetalles(@RequestBody OrdenesDetalles ordenesDetalles){
-        ordenesDetalles.setId_orden(ordenId);
-        return this.ordenesServicio.addDetalles(ordenesDetalles);
-    }
+    
     
     @GetMapping("/ordenes")
     public List<Ordenes> mostrarOrdenes(){
         return this.ordenesServicio.mostrarOrdenes();
     }
-    private Integer ordenId = -3;
+    @GetMapping("/producto_ordenes")
+    public List<Producto_Ordenes> mostrarProductoOrdenes(){
+        return this.ordenesServicio.mostrarProducto_Ordenes();
+    }
 }
 
