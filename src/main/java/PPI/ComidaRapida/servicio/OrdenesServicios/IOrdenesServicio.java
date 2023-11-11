@@ -1,4 +1,4 @@
-package PPI.ComidaRapida.servicio;
+package PPI.ComidaRapida.servicio.OrdenesServicios;
 
 import java.util.List;
 import java.util.Map;

@@ -22,7 +22,7 @@ public class Ordenes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name="num_gen", sequenceName="num_seq", allocationSize=30)
     Integer idOrden;
-    Integer idUsuario = 1;
+    Integer idUsuario;
     String direccion;
     Integer montoTotal;
     

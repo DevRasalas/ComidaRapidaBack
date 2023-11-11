@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import PPI.ComidaRapida.modelo.Ordenes;
-import PPI.ComidaRapida.modelo.Producto_Ordenes;
-import PPI.ComidaRapida.servicio.OrdenesServicio;
+import PPI.ComidaRapida.servicio.OrdenesServicios.OrdenesServicio;
 
 @RestController
 //Une con Angular
