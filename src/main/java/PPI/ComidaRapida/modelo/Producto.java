@@ -19,8 +19,8 @@ public class Producto {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @SequenceGenerator(name="prod_gen", sequenceName="prod_seq", allocationSize=30)
-    Integer idProducto;
-    String nombreProducto;
-    Integer precioProducto;
-    String urlImagen;
+    private Integer idProducto;
+    private String nombreProducto;
+    private Integer precioProducto;
+    private String urlImagen;
 }

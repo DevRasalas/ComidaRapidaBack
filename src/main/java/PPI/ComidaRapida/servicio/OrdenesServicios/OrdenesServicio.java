@@ -13,6 +13,7 @@ import PPI.ComidaRapida.repositorio.OrdenesRepositorio;
 import PPI.ComidaRapida.repositorio.ProductoRepositorio;
 import PPI.ComidaRapida.repositorio.Producto_OrdenRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
 public class OrdenesServicio implements IOrdenesServicio {
@@ -28,10 +29,12 @@ public class OrdenesServicio implements IOrdenesServicio {
 
     @Override
     @Transactional
+    
     public void crearOrdenConProducto(Map<String, Object> ordenes) {
         // Extraer la orden del JSON
 
         Map<String, Object> ordenData = (Map<String, Object>) ordenes.get("orden");
+        
         Ordenes nuevaOrden = new Ordenes();
         nuevaOrden.setIdUsuario(1);
         nuevaOrden.setDireccion(ordenData.get("direccion").toString());

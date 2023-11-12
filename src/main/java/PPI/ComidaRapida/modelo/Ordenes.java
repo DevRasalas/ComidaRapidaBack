@@ -21,10 +21,10 @@ public class Ordenes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name="num_gen", sequenceName="num_seq", allocationSize=30)
-    Integer idOrden;
-    Integer idUsuario;
-    String direccion;
-    Integer montoTotal;
+    private Integer idOrden;
+    private Integer idUsuario;
+    private String direccion;
+    private Integer montoTotal;
     
    
 }
