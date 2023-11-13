@@ -37,8 +37,13 @@ public class Usuarios implements UserDetails {
     @SequenceGenerator(name="us_gen", sequenceName="us_seq", allocationSize=30)
     private Integer idUsuario;
     @Column(nullable = false)
+    
+    private String nombre;
+    private String apellido;
+    private Integer edad;
     private String correo;
     private String password;
+    
     @Enumerated(EnumType.STRING)
     private Role roles;
     @Override

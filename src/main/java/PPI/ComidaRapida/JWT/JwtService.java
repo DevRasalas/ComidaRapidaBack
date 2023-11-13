@@ -9,6 +9,7 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import PPI.ComidaRapida.modelo.Usuarios;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -25,6 +26,13 @@ public class JwtService {
     }
 
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
+        Map<String, Object> claims = new HashMap<>();
+
+        claims.put("userId", obtenerIdUsuario(user));
+        claims.put("userCorreo", obtenerCorreo(user));
+        claims.put("userNombre", obtenerNombre(user));
+        claims.put("userApellido", obtenerApellido(user));
+        claims.put("userEdad", obtenerEdad(user));
         return Jwts
         .builder()
         .setClaims(extraClaims)
@@ -66,5 +74,34 @@ public class JwtService {
    private Boolean IsTokenExpired(String Token){
         return getExpiration(Token).before(new Date());
    }
-
+   private Integer obtenerIdUsuario(UserDetails user){
+        if (user instanceof Usuarios){
+            return ((Usuarios) user).getIdUsuario();
+        }
+        return null;
+   }
+   private String obtenerCorreo(UserDetails user){
+        if (user instanceof Usuarios){
+            return ((Usuarios) user).getCorreo();
+        }
+        return null;
+   }
+   private String obtenerNombre(UserDetails user){
+        if (user instanceof Usuarios){
+            return ((Usuarios) user).getNombre();
+        }
+        return null;
+   }
+   private String obtenerApellido(UserDetails user){
+        if (user instanceof Usuarios){
+            return ((Usuarios) user).getApellido();
+        }
+        return null;
+   }
+   private Integer obtenerEdad(UserDetails user){
+        if (user instanceof Usuarios){
+            return ((Usuarios) user).getEdad();
+        }
+        return null;
+   }
 }

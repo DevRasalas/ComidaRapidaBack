@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import PPI.ComidaRapida.JWT.JwtService;
-import PPI.ComidaRapida.User.Role;
 import PPI.ComidaRapida.modelo.Usuarios;
 import PPI.ComidaRapida.repositorio.UsuarioRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +34,11 @@ public class AuthService {
     public AuthResponse registrar(RegistroRequest registroRequest) {
         Usuarios usuarios = Usuarios.builder()
             .correo(registroRequest.getCorreo())
-            .roles(Role.cliente)
-            .password(passwordEncoder.encode(registroRequest.getPassword()))
+            .roles(registroRequest.getRoles())
+            .password(passwordEncoder.encode(registroRequest.getPassword())
+            ).nombre(registroRequest.getNombre())
+            .apellido(registroRequest.getApellido())
+            .edad(registroRequest.getEdad())
             .build();
         usuarioRepositorio.save(usuarios);
 
